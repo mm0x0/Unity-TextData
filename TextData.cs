@@ -7,8 +7,9 @@ using Sirenix.OdinInspector;
 public class TextData : ScriptableObject
 {
 	// データリスト
-	[SerializeField, LabelText ("Items (JP / EN)"),
-	 InfoBox ("IDが重複してるよ〜", InfoMessageType.Warning, "HasOverlappingItem"),
+	[SerializeField,
+	 LabelText      ("Items (JP / EN)"),
+	 InfoBox        ("IDが重複してるよ〜", InfoMessageType.Warning, "HasOverlappingItem"),
 	 OnValueChanged ("SetDefaultID")]
 	List<TextDataItem> items = new List<TextDataItem> ();
 
@@ -74,10 +75,10 @@ public class TextData : ScriptableObject
 
 	public string GetLocalizedText (string ID)
 	{
-		if (Application.systemLanguage == SystemLanguage.Japanese)
-			return GetTextJP (ID);
-		else
-			return GetTextEN (ID);
+		return
+			(Application.systemLanguage == SystemLanguage.Japanese) ?
+				GetTextJP (ID):
+				GetTextEN (ID);
 	}
 
 	// IDがあるか判別
